@@ -2,8 +2,11 @@
 Build env for fastbot BBP 
 -------------------------
 
-1.mkdir ~/fastbot <br> 
-  mkdir ~/fastbot/tools/ <br>
+1. make directory <br> 
+```
+  mkdir ~/fastbot
+  mkdir ~/fastbot/tools/ 
+```
 
 2.download gcc compile tool and extract file to put them into tools directory. <br>
 download address is https://onedrive.live.com/redir?resid=F126DF2F21ED21A1!124&authkey=!ABtPtGiUpozdNys&ithint=file%2cxz  <br>
