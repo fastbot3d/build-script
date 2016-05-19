@@ -258,7 +258,6 @@ build_init()
 	fi
 	if [ ! -e $PRJROOT/firmware ] ; then
 		git clone https://github.com/fastbot3d/firmware.git
-		git checkout -b android 
 	fi
 
     echo "--------------------------------------"
