@@ -4,8 +4,7 @@ Build env for fastbot BBP
 
 1. make directory <br> 
 ```
-  mkdir ~/fastbot
-  mkdir ~/fastbot/tools/ 
+  mkdir -p ~/fastbot/tools/ 
 ```
 
 2.download gcc compile tool and extract file to put them into tools directory. <br>
@@ -16,8 +15,10 @@ ls tools/
 gcc-linaro-arm-linux-gnueabihf-4.7-2013.04-20130415_linux 
 ```
 
-3.git clone https://github.com/fastbot3d/build-script.git <br>
+3.clone project
 ```
+cd ~/fastbot
+git clone https://github.com/fastbot3d/build-script.git 
 cp ./build-script/build.sh .  
 chmod u+x build.sh 
 ./build.sh init 
