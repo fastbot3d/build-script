@@ -8,7 +8,7 @@ Build env for fastbot BBP
   mkdir ~/fastbot/tools/ 
 ```
 
-2.ready for tool.
+2.ready for tool <br>
 2.1 download gcc compile tool and extract file to put them into tools directory. <br>
 download address is https://onedrive.live.com/redir?resid=F126DF2F21ED21A1!124&authkey=!ABtPtGiUpozdNys&ithint=file%2cxz  <br>
 
