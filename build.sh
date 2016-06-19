@@ -8,6 +8,11 @@ set -e
 # ./build.sh help
 #------------------------------------------------------------
 
+#------------------------------------------------------------ 
+# settup the following env variable to fix up your system
+CSTOOL_DIR=
+#------------------------------------------------------------
+
 PRJROOT=`pwd`
 KERNEL_DIR=$PRJROOT/linux-3.2.0
 UBOOT_DIR=$PRJROOT/u-boot
@@ -27,6 +32,7 @@ export INSTALL_DRV_DIR=$INSTALL_DRV_DIR
 export KERNEL_DIR="$KERNEL_DIR"
 export PATH=$PRJROOT/tools/gcc-linaro-arm-linux-gnueabihf-4.7-2013.04-20130415_linux/bin/:$PATH
 export CROSS_COMPILE=arm-linux-gnueabihf-
+export NDK=$PRJROOT/tools/android-ndk-r10e
 
 TARGET=arm-linux-gnueabihf
 KERNEL_DEF_CFG=am335x_evm_android_defconfig
@@ -213,13 +219,30 @@ build_fw()
     echo "--------------------------------------"
     echo "-- Start to bulding firmware        --" 
     echo "--------------------------------------"
+    echo "--------------------------------------"
+    echo "-- compile for debian  --" 
+    echo "--------------------------------------"
+
 	cd $FW_DIR/pru_sw;  make
-    cd $FW_DIR/unicorn;make clean;make
+    cd $FW_DIR/unicorn;make fw;make clean;make
 
     if [ ! -d "$ROOTFS_DIR/usr/bin" ]; then
         mkdir -p $ROOTFS_DIR/usr/bin
     fi
     cp -f $FW_DIR/unicorn/build/target/bin/unicorn $ROOTFS_DIR/usr/bin/
+
+    echo ""
+    echo ""
+    echo ""
+    echo "--------------------------------------"
+    echo "-- compile for android  --" 
+    echo "--------------------------------------"
+	rm -rf $FW_DIR/obj/
+	rm -rf $FW_DIR/pru_sw/obj/
+    cd $FW_DIR/pru_sw/src/jni &&  "$NDK"/ndk-build;
+    cd $FW_DIR/jni && "$NDK"/ndk-build;
+	echo $FW_DIR/pru_sw/src/libs/armeabi-v7a/libprussdrv.so  
+	echo $FW_DIR/libs/armeabi-v7a/unicorn_android 
 
     echo "--------------------------------------"
     echo "-- build firmware completed!        --"
@@ -258,6 +281,7 @@ build_init()
 	fi
 	if [ ! -e $PRJROOT/firmware ] ; then
 		git clone https://github.com/fastbot3d/firmware.git
+		git checkout -b android 
 	fi
 
     echo "--------------------------------------"
