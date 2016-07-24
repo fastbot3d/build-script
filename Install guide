@@ -1,0 +1,29 @@
+This is how I got it to work as the readme file in here is crap!!
+
+
+Before starting I had to install these programs.
+Install them as root, using "su" command.
+
+
+apt-remove git
+apt-get install git
+apt-get install make
+apt-get install gcc
+apt-get install u-boot-tools
+
+After you have made the directories according to the readme file you can use this command
+to copy the extracted files into the newly made directories
+
+sudo nautilus used to open file manager as root to copy files
+Copy files to root/fastbot
+
+After you used git to get repository you need to make two changes to build.sh as that file contains errors.
+
+
+change build.sh
+-remove extra dash at firmware (line 110)
+-remoce extra dash at && (line 242)
+
+before executing ./build.sh init you need to excute git init
+
+./build.sh init executed in tools folder
